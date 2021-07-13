@@ -10,15 +10,19 @@ interface Task {
   isComplete: boolean;
 }
 
+
+
 export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
-  function handleCreateNewTask(data: Task) {
-    if (newTaskTitle == '' || /\s/.test(newTaskTitle)) return 0
-    data.id = Math.random();
-    data.isComplete = false;
-    data.title = newTaskTitle;
+  function handleCreateNewTask() {  
+    if (newTaskTitle == '' || /\s/.test(newTaskTitle)) return;
+    const data = {
+      id: Math.random(),
+      isComplete: false,
+      title: newTaskTitle,
+    }  
 
     setTasks(tasks => [...tasks, data]);
     setNewTaskTitle('');
@@ -28,7 +32,7 @@ export function TaskList() {
     const updatedArray = tasks.map(tasks => {
       if (tasks.id == id)
       {
-        tasks.isComplete = !tasks.isComplete
+        tasks.isComplete = !tasks.isComplete;
       }
       return tasks; 
     });
